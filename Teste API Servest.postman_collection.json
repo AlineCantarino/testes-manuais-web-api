@@ -1,0 +1,2638 @@
+{
+	"info": {
+		"_postman_id": "8063d4f4-d2b0-4af5-ab7e-103e16a8d2e3",
+		"name": "Teste API Servest",
+		"description": "Contexto: \nDADO que acesso a API https://serverest.dev/\n\nCenário:\nValidar login com sucesso\n\nQUANDO executo a requisição POST /login preenhendo os parâmetros com valores válidos\nENTÃO a API retorna status code 200\nE retorna mensagem: \"Login realizado com sucesso\"\nE retorna atributo \"message\"\nE retorna atributo \"authorization\"\n\nCenário:\nValidar login sem informar os parâmetros do json\n\nQUANDO executo a requisição POST /login não passando os parâmetros do json\nENTÃO a API retorna status code 400\nE retorna a mensagem: \"email é obrigatório\"\nE a mensagem: \"password é obrigatório\"\nE retorna o atributo \"email\"\nE retorna o atributo \"password\"\n\nCenário:\nValidar login preenchendo o campo email com valor inválido\n\nQUANDO executo a requisição POST /login informando um email inválido\nENTÃO a API retorna status code 400\nE retorna a mensagem: \"email deve ser um email válido\"\nE retorna o atributo \"email\"\n\nCenário:\nValidar login preenchendo a email com valor não correspondente a senha\n\nQUANDO executo a requisição POST /login informando uma senha que não corresponde ao email\nENTÃO a API retorna status code 401\nE retorna a mensagem: \"Email e/ou senha inválidos\"\nE retorna o atributo \"message\"\n\nCenário:\nValidar cadastro de usuário com sucesso\n\nQUANDO executo a requisição POST /usuarios preenhendo os parâmetros com valores válidos\nENTÃO a API retorna status code 201\nE retorna a mensagem: \"Cadastro realizado com sucesso\"\nE retorna o atributo \"message\"\n\nCenário:\nValidar busca de usuário por ID\n\nQUANDO executo a requisição GET /usuarios passando um id de usuário válido\nENTÃO a API retorna status code 200\nE retorna o atributo \"nome\"\nE retorna o atributo \"email\"\nE retorna o atributo \"password\"\nE retorna o atributo \"adminstrador\"\nE retorna o atributo \"_id\"\n\nCenário:\nValidar lista de usuários cadastrados\n\nQUANDO executo a requisição GET /usuarios\nENTÃO a API retorna status code 200\nE retorna lista com arrays de usuários cadastrados\n\n\nCenário:\nValidar cadastro de usuário duplicado\n\nQUANDO executo a requisição POST /usuarios preenchendo o parâmetro email com valor que já existe na base de dados\nENTÃO a API retorna status code 400\nE retorna atributo “message”\nE retorna mensagem: “Este email já está sendo usado”\n\nCenário:\nValidar cadastro de usuário sem preencher os campos obrigatórios\n\nQUANDO executo a requisição POST /usuarios sem preencher os parâmetros obrigatórios\nENTÃO a API retorna status code 400\nE retorna atributo \"nome\"\nE retorna atributo \"email\"\nE retorna atributo \"password\"\nE retorna  atributo \"administrador\"\nE retorna mensagem \"nome não pode ficar em branco\" \nE retorna mensagem \"email não pode ficar em branco\" \nE retorna mensagem \"password não pode ficar em branco\" \nE retorna mensagem \"administrador deve ser 'true' ou 'false'\" \n\nCenário:\nValidar editar registro com sucesso\n\nQUANDO executo a requisição PUT /usuarios alterando os parâmetros de usuários\nENTÃO a API retorna status code 200\nE retorna atributo \"message\"\nE retorna mensagem \"Registro alterado com sucesso\" \n\nCenário:\nValidar excluir registro com sucesso\n\nQUANDO executo a requisição DEL /usuarios passando o id de um usuário válido\nENTÃO a API retorna status code 200\nE retorna atributo \"message\"\nE retorna mensagem \"Registro excluído com sucesso\" \n\nCenário:\nValidar lista de produtos cadastrados\n\nQUANDO executo a requisição GET /produtos \nENTÃO a API retorna status code 200\nE retorna lista contendo os produtos cadastrados na base\nE retorna o atributo \"quantidade\"\nE retorna o atributo \"produtos\"\n\nCenário:\nValidar cadastro de produto com sucesso\n\nQUANDO executo a requisição POST /produtos preenchendo os parâmetros com valores válidos\nENTÃO a API retorna status code 201\nE retorna a mensagem \"Cadastro realizado com sucesso\"\nE retorna o atributo \"message\"\nE retorna o atributo \"_id\"\n\n\nCenário:\nValidar buscar produto por ID\n\nQUANDO executo a requisição POST /produtos informando um id de um produto válido\nENTÃO a API retorna status code 200\nE retorna o atributo \"nome\"\nE retorna o atributo \"preco\"\nE retorna o atributo \"descricao\"\nE retorna o atributo \"quantidade\"\nE retorna o atributo \"_id\"\n\nCenário:\nValidar alterar produto com sucesso\n\nQUANDO executo a requisição PUT /produtos alterando os parâmetros de produto\nENTÃO a API retorna status code 200\nE retorna o atributo \"message\"\nE retorna a mensagem \"Registro alterado com sucesso\"\n\nCenário:\nValidar excluir produto com sucesso\n\nQUANDO executo a requisição DEL /produtos passando um id válido\nENTÃO a API retorna status code 200\nE retorna o atributo \"message\"\nE retorna a mensagem \"Registro excluído com sucesso\"\n\nCenário:\nValidar listas de carrinhos cadastrados\n\nQUANDO executo a requisição GET /carrinhos\nENTÃO a API retorna status code 200\nE retorna lista contendo os carrinhos da base\nE retorna o atributo \"quantidade\"\nE retorna o atributo \"carrinhos\"\n\nCenário:\nValidar cadastrar carrinho com sucesso\n\nQUANDO executo a requisição POST /carrinhos preenchendo os parâmetros com valores válidos\nENTÃO a API retorna status code 201\nE retorna atributo \"message\"\nE retorna atributo \"_id\"\nE retorna mensagem \"Cadastro realizado com sucesso\" \n\nCenário:\nValidar buscar carrinho por ID\n\nQUANDO executo a requisição POST /carrinhos preenchendo os parâmetros com valores válidos\nENTÃO a API retorna status code 200\nE retorna atributo \"produtos\"\nE retorna atributo \"precoTotal\"\nE retorna atributo \"quantidadeTotal\"\nE retorna atributo \"idUsuario\"\nE retorna  atributo \"_id\"\n\nCenário:\nValidar excluir carrinho com sucesso\n\nQUANDO executo a requisição DEL /carrinhos informando um id de um carrinho válido\nENTÃO a API retorna status code 200\nE retorna atributo \"message\"\nE retorna mensagem \"Registro excluído com sucesso\"\n\nCenário:\nValidar excluir carrinho e retornar produto ao estoque\n\nQUANDO executo a requisição DEL /carrinhos informando um id de um carrinho válido\nENTÃO a API retorna status code 200\nE retorna atributo \"message\"\nE retorna mensagem \"Registro excluído com sucesso. Estoque dos produtos reabastecido\"",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Validar login com sucesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();     \r",
+									"pm.test(\"Status: 200, OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.response.to.be.ok;    \r",
+									"\r",
+									"    pm.environment.set(\"token\", response.authorization);  \r",
+									"});\r",
+									"\r",
+									"pm.test('Mensagem \"Login realizado com sucesso\"', function () {\r",
+									"    pm.expect(JSON.stringify(response)).to.include(\"Login realizado com sucesso\");\r",
+									"});\r",
+									"\r",
+									"const atributos = ['message', 'authorization']\r",
+									"\r",
+									"atributos.forEach((atributo) => {\r",
+									"    pm.test(`Resposta contém atributo \"${atributo}\"`, () => {\r",
+									"        pm.expect(response[atributo]).to.exist\r",
+									"        console.log(response)\r",
+									"    })\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const baseUrl = pm.environment.get('baseUrl');\r",
+									"const nome = pm.variables.replaceIn('{{$randomFirstName}}')\r",
+									"const email = pm.variables.replaceIn('{{$randomEmail}}')\r",
+									"const password = \"teste\"\r",
+									"\r",
+									"const postRequest = {\r",
+									"    url: `${baseUrl}/usuarios`,\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/json'\r",
+									"        },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            \"nome\": nome,\r",
+									"            \"email\": email,\r",
+									"            \"password\": password,\r",
+									"            \"administrador\": \"true\"\r",
+									"        })\r",
+									"    } \r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(postRequest, (err, res) => {\r",
+									"    console.log(err ? err : res.json());\r",
+									"    try {\r",
+									"        pm.environment.set('email_usuario', email)\r",
+									"        pm.environment.set('password_usuario', password)\r",
+									"    } catch {\r",
+									"        console.warn('FAIL')\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"{{email_usuario}}\",\r\n  \"password\": \"{{password_usuario}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar login sem informar os parametros do json",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"const response = pm.response.json(); \r",
+									"\r",
+									"//Valida statusCode\r",
+									"const statusCode = 400\r",
+									"pm.test(`Status: ${statusCode}, OK`, function () {\r",
+									"    pm.response.to.have.status(statusCode);\r",
+									"    pm.response.to.be.badRequest;    \r",
+									"});\r",
+									"\r",
+									"//valida existência de conjunto de atributos\r",
+									"const atributos = ['email', 'password']\r",
+									"\r",
+									"atributos.forEach((atributo) => {\r",
+									"    pm.test(`Resposta contém atributo \"${atributo}\"`, () => {\r",
+									"        pm.expect(response[atributo]).to.exist\r",
+									"    })\r",
+									"})\r",
+									"\r",
+									"//Valida mensagem principal\r",
+									"const mensagens = ['email é obrigatório', 'password é obrigatório']\r",
+									"\r",
+									"mensagens.forEach((mensagem) => {\r",
+									"    pm.test(`Mensagem \"${mensagem}\" é exibida`, function () {\r",
+									"        pm.expect(JSON.stringify(response)).to.include(mensagem);\r",
+									"    });\r",
+									"})\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar login preenchendo o campo email com valor inválido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//declara response como resposta da requisição\r",
+									"const response = pm.response.json(); \r",
+									"\r",
+									"//Valida statusCode\r",
+									"const statusCode = 400\r",
+									"pm.test(`Status: ${statusCode}, bad request`, function () {\r",
+									"    pm.response.to.have.status(statusCode);\r",
+									"    pm.response.to.be.badRequest; \r",
+									"});\r",
+									"\r",
+									"//valida existência de atributo\r",
+									"pm.test(`Resposta contém atributo \"email\"`, () => {\r",
+									"    pm.expect(response.email).to.exist\r",
+									"})\r",
+									"/******************************************/\r",
+									"\r",
+									"//Valida mensagem principal\r",
+									"const mensagem = 'email deve ser um email válido'\r",
+									"pm.test(`Mensagem \"${mensagem}\" é exibida`, function () {\r",
+									"    pm.expect(JSON.stringify(response)).to.include(mensagem);\r",
+									"});\r",
+									"/******************************************/\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"fulanoqa.com\",\r\n  \"password\": \"teste\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar login preenchendo a email com valor não correspondente a senha",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"//declara response como resposta da requisição\r",
+									"const response = pm.response.json(); \r",
+									"\r",
+									"//Valida statusCode\r",
+									"const statusCode = 401\r",
+									"pm.test(`Status: ${statusCode}, unauthorized`, function () {\r",
+									"    pm.response.to.have.status(statusCode);\r",
+									"    pm.response.to.be.unauthorized; //ou to.be.badRequest etc\r",
+									"});\r",
+									"/******************************************/\r",
+									"\r",
+									"//valida existência de conjunto de atributos\r",
+									"const atributo = 'message';\r",
+									"\r",
+									"pm.test(`Resposta contém atributo \"${atributo}\"`, () => {\r",
+									"    pm.expect(response[atributo]).to.exist\r",
+									"})\r",
+									"/******************************************/\r",
+									"\r",
+									"//Valida mensagem principal\r",
+									"const mensagem = 'Email e/ou senha inválidos'\r",
+									"pm.test(`Mensagem \"${mensagem}\" é exibida`, function () {\r",
+									"    pm.expect(JSON.stringify(response)).to.include(mensagem);\r",
+									"});\r",
+									"/******************************************/\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const baseUrl = pm.environment.get('baseUrl');\r",
+									"const nome = pm.variables.replaceIn('{{$randomFirstName}}')\r",
+									"const email = pm.variables.replaceIn('{{$randomEmail}}')\r",
+									"const password = \"teste\"\r",
+									"\r",
+									"const postRequest = {\r",
+									"    url: `${baseUrl}/usuarios`,\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/json'\r",
+									"        },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            \"nome\": nome,\r",
+									"            \"email\": email,\r",
+									"            \"password\": password,\r",
+									"            \"administrador\": \"true\"\r",
+									"        })\r",
+									"    } \r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(postRequest, (err, res) => {\r",
+									"    console.log(err ? err : res.json());\r",
+									"    try {\r",
+									"        pm.environment.set('email_usuario', email)        \r",
+									"    } catch {\r",
+									"        console.warn('FAIL')\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"{{email_usuario}}\",\r\n  \"password\": \"SENHA ERRADA QUE NÃO EXISTE 123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Autentique o seu usuário para montar um carrinho e, se for administrador, gerenciar os produtos"
+		},
+		{
+			"name": "Usuários",
+			"item": [
+				{
+					"name": "Validar cadastro de usuário com sucesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//declara response como resposta da requisição\r",
+									"const response = pm.response.json(); \r",
+									"\r",
+									"//Valida statusCode e salva id do usuário em uma variável\r",
+									"const statusCode = 201\r",
+									"pm.test(`Status: ${statusCode}, created`, function () {\r",
+									"    pm.response.to.have.status(statusCode);\r",
+									"      \r",
+									"    pm.environment.set(\"id_usuario\", response._id);\r",
+									"});\r",
+									"\r",
+									"/******************************************/\r",
+									"\r",
+									"//valida existência de conjunto de atributos\r",
+									"const atributo = 'message'\r",
+									"\r",
+									"pm.test(`Resposta contém atributo \"${atributo}\"`, () => {\r",
+									"    pm.expect(response[atributo]).to.exist\r",
+									"})\r",
+									"\r",
+									"/******************************************/\r",
+									"\r",
+									"//Valida mensagem principal\r",
+									"const mensagem = 'Cadastro realizado com sucesso'\r",
+									"pm.test(`Mensagem \"${mensagem}\" é exibida`, function () {\r",
+									"    pm.expect(JSON.stringify(response)).to.include(mensagem);\r",
+									"});\r",
+									"/******************************************/\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"{{$randomFirstName}}\", \r\n  \"email\": \"{{$randomEmail}}\",\r\n  \"password\": \"{{$randomPassword}}\",\r\n  \"administrador\": \"true\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/usuarios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar busca de usuário por ID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//constante contendo baseURL atual para usar no script\r",
+									"const baseUrl = pm.environment.get('baseUrl');\r",
+									"\r",
+									"//chamada para função interna de geração aleatória de valores\r",
+									"const nome = pm.variables.replaceIn('{{$randomFirstName}}')\r",
+									"const email = pm.variables.replaceIn('{{$randomEmail}}')\r",
+									"const password = pm.variables.replaceIn('teste')\r",
+									"const administrador = pm.variables.replaceIn('true')\r",
+									"\r",
+									"//dados da requisição\r",
+									"const postRequest = {\r",
+									"    url: `${baseUrl}/usuarios`,\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/json'  \r",
+									"        },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            \"nome\": nome, \r",
+									"            \"email\": email,\r",
+									"            \"password\": password,\r",
+									"            \"administrador\": administrador\r",
+									"        })\r",
+									"    } \r",
+									"}\r",
+									"\r",
+									"//requisição\r",
+									"pm.sendRequest(postRequest, (err, res) => {\r",
+									"    console.log(err ? err : res.json());\r",
+									"    try {\r",
+									"        pm.environment.set('nome_usuario',nome)\r",
+									"        pm.environment.set('email_usuario', email)\r",
+									"        pm.environment.set('password_usuario', password)\r",
+									"        pm.environment.set('administrador_usuario', administrador)\r",
+									"        pm.environment.set('id_usuario', res.json()['_id'])\r",
+									"    } catch {\r",
+									"        console.warn('FAIL')\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//declara response como resposta da requisição\r",
+									"const response = pm.response.json(); \r",
+									"\r",
+									"//Valida statusCode\r",
+									"const statusCode = 200\r",
+									"pm.test(`Status: ${statusCode}, OK`, function () {\r",
+									"    pm.response.to.have.status(statusCode);\r",
+									"    pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"//valida existência de conjunto de atributos\r",
+									"const atributos = ['nome', 'email', 'password', 'administrador', '_id']\r",
+									"\r",
+									"atributos.forEach((atributo) => {\r",
+									"    pm.test(`Resposta contém atributo \"${atributo}\"`, () => {\r",
+									"        pm.expect(response[atributo]).to.exist\r",
+									"    })\r",
+									"})\r",
+									"\r",
+									"//Valida dados cadastrados\r",
+									"pm.test(`Os dados do usuário correspondem aos cadastrados`, function () {\r",
+									"    pm.expect(response.nome).to.equals(pm.environment.get('nome_usuario'));\r",
+									"    pm.expect(response.email).to.equals(pm.environment.get('email_usuario'));\r",
+									"    pm.expect(response.password).to.equals(pm.environment.get('password_usuario'));\r",
+									"    pm.expect(response.administrador).to.equals(pm.environment.get('administrador_usuario'));\r",
+									"    pm.expect(response['_id']).to.equals(pm.environment.get('id_usuario'));\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/usuarios/{{id_usuario}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"usuarios",
+								"{{id_usuario}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar lista de usuários cadastrados",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json(); \r",
+									"\r",
+									"pm.test(\"Status: 200, OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.response.to.be.ok;        \r",
+									"});\r",
+									"\r",
+									"pm.test('Quantidade de usuários é exibida adequadamente', () => {\r",
+									"    pm.expect(response.quantidade).equals(response.usuarios.length)\r",
+									"})\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/usuarios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar cadastro de usuário duplicado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json(); \r",
+									"\r",
+									"//Valida statusCode\r",
+									"const statusCode = 400\r",
+									"pm.test(`Status: ${statusCode}, badRequest`, function () {\r",
+									"    pm.response.to.have.status(statusCode);\r",
+									"    pm.response.to.be.badRequest; \r",
+									"});\r",
+									"\r",
+									"//valida existência de conjunto de atributos\r",
+									"const atributo = 'message'\r",
+									"\r",
+									"pm.test(`Resposta contém atributo \"${atributo}\"`, () => {\r",
+									"    pm.expect(response[atributo]).to.exist\r",
+									"})\r",
+									"\r",
+									"//Valida mensagem principal\r",
+									"const mensagem = 'Este email já está sendo usado'\r",
+									"pm.test(`Mensagem \"${mensagem}\" é exibida`, function () {\r",
+									"    pm.expect(JSON.stringify(response)).to.include(mensagem);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//constante contendo baseURL atual para usar no script\r",
+									"const baseUrl = pm.environment.get('baseUrl');\r",
+									"\r",
+									"//chamada para função interna de geração aleatória de valores\r",
+									"const nome = pm.variables.replaceIn('{{$randomFirstName}}')\r",
+									"const email = pm.variables.replaceIn('{{$randomEmail}}')\r",
+									"const password = pm.variables.replaceIn('teste')\r",
+									"const administrador = pm.variables.replaceIn('true')\r",
+									"\r",
+									"//dados da requisição\r",
+									"const postRequest = {\r",
+									"    url: `${baseUrl}/usuarios`,\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/json'  \r",
+									"        },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            \"nome\": nome, \r",
+									"            \"email\": email,\r",
+									"            \"password\": password,\r",
+									"            \"administrador\": administrador\r",
+									"        })\r",
+									"    } \r",
+									"}\r",
+									"\r",
+									"//requisição\r",
+									"pm.sendRequest(postRequest, (err, res) => {\r",
+									"    console.log(err ? err : res.json());\r",
+									"    try {\r",
+									"        pm.environment.set('nome_usuario',nome)\r",
+									"        pm.environment.set('email_usuario', email)\r",
+									"        pm.environment.set('password_usuario', password)\r",
+									"        pm.environment.set('administrador_usuario', administrador)\r",
+									"        pm.environment.set('id_usuario', res.json()['_id'])\r",
+									"    } catch {\r",
+									"        console.warn('FAIL')\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"nome\": \"{{$randomFirstName}}\", \r\n \"email\": \"{{email_usuario}}\",\r\n \"password\": \"{{$randomPassword}}\",\r\n \"administrador\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/usuarios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar cadastro de usuário sem preencher os campos obrigatórios",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//declara response como resposta da requisição\r",
+									"const response = pm.response.json(); \r",
+									"\r",
+									"//Valida statusCode\r",
+									"const statusCode = 400\r",
+									"pm.test(`Status: ${statusCode}, badRequest`, function () {\r",
+									"    pm.response.to.have.status(statusCode);\r",
+									"    pm.response.to.be.badRequest; \r",
+									"});\r",
+									"\r",
+									"//valida existência de conjunto de atributos\r",
+									"const atributos = ['nome', 'email', 'password', 'administrador']\r",
+									"\r",
+									"atributos.forEach((atributo) => {\r",
+									"    pm.test(`Resposta contém atributo \"${atributo}\"`, () => {\r",
+									"        pm.expect(response[atributo]).to.exist\r",
+									"    })\r",
+									"})\r",
+									"\r",
+									"//Valida mensagem principal\r",
+									"const mensagens = ['nome não pode ficar em branco', 'email não pode ficar em branco', 'password não pode ficar em branco', `administrador deve ser 'true' ou 'false'`]\r",
+									"\r",
+									"mensagens.forEach((mensagem) => {\r",
+									"    pm.test(`Mensagem \"${mensagem}\" é exibida`, function () {\r",
+									"        pm.expect(JSON.stringify(response)).to.include(mensagem);\r",
+									"    });\r",
+									"})\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"\",\r\n  \"email\": \"\",\r\n  \"password\": \"\",\r\n  \"administrador\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/usuarios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar editar registro com sucesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json(); \r",
+									"\r",
+									"//Valida statusCode\r",
+									"const statusCode = 200\r",
+									"pm.test(`Status: ${statusCode}, OK`, function () {\r",
+									"    pm.response.to.have.status(statusCode);\r",
+									"    pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"//valida existência de conjunto de atributos\r",
+									"const atributo = 'message'\r",
+									"\r",
+									"pm.test(`Resposta contém atributo \"${atributo}\"`, () => {\r",
+									"    pm.expect(response[atributo]).to.exist\r",
+									"})\r",
+									"\r",
+									"//Valida mensagem principal\r",
+									"const mensagem = 'Registro alterado com sucesso'\r",
+									"pm.test(`Mensagem \"${mensagem}\" é exibida`, function () {\r",
+									"    pm.expect(JSON.stringify(response)).to.include(mensagem);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//validar que dados foram efetivamente alterados no ID indicado\r",
+									"const baseUrl = pm.environment.get('baseUrl');\r",
+									"const id = pm.environment.get('id_usuario')\r",
+									"\r",
+									"const getRequest = {\r",
+									"    url: `${baseUrl}/usuarios/${id}`,\r",
+									"    method: 'GET',\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(getRequest, (err, res) => {\r",
+									"    try {\r",
+									"        pm.test('Novos dados foram registrados no ID corretamente', () => {\r",
+									"            pm.expect(res.json().nome).not.equals(pm.environment.get('nome_usuario'))\r",
+									"            pm.expect(res.json().email).not.equals(pm.environment.get('email_usuario'))\r",
+									"            pm.expect(res.json().password).not.equals(pm.environment.get('password_usuario'))\r",
+									"        })\r",
+									"    } catch {\r",
+									"        console.warn('FAIL')\r",
+									"    }\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//constante contendo baseURL atual para usar no script\r",
+									"const baseUrl = pm.environment.get('baseUrl');\r",
+									"\r",
+									"//chamada para função interna de geração aleatória de valores\r",
+									"const nome = pm.variables.replaceIn('{{$randomFirstName}}')\r",
+									"const email = pm.variables.replaceIn('{{$randomEmail}}')\r",
+									"const password = pm.variables.replaceIn('teste')\r",
+									"const administrador = pm.variables.replaceIn('true')\r",
+									"\r",
+									"//dados da requisição\r",
+									"const postRequest = {\r",
+									"    url: `${baseUrl}/usuarios`,\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/json'  \r",
+									"        },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            \"nome\": nome, \r",
+									"            \"email\": email,\r",
+									"            \"password\": password,\r",
+									"            \"administrador\": administrador\r",
+									"        })\r",
+									"    } \r",
+									"}\r",
+									"\r",
+									"//requisição\r",
+									"pm.sendRequest(postRequest, (err, res) => {\r",
+									"    console.log(err ? err : res.json());\r",
+									"    try {\r",
+									"        pm.environment.set('nome_usuario',nome)\r",
+									"        pm.environment.set('email_usuario', email)\r",
+									"        pm.environment.set('password_usuario', password)\r",
+									"        pm.environment.set('administrador_usuario', administrador)\r",
+									"        pm.environment.set('id_usuario', res.json()['_id'])\r",
+									"    } catch {\r",
+									"        console.warn('FAIL')\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"{{$randomFirstName}}\", \r\n  \"email\": \"{{$randomEmail}}\",\r\n  \"password\": \"{{$randomPassword}}\",\r\n  \"administrador\": \"false\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/usuarios/{{id_usuario}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"usuarios",
+								"{{id_usuario}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar excluir registro com sucesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//declara response como resposta da requisição\r",
+									"const response = pm.response.json(); \r",
+									"\r",
+									"//Valida statusCode\r",
+									"const statusCode = 200\r",
+									"pm.test(`Status: ${statusCode}, OK`, function () {\r",
+									"    pm.response.to.have.status(statusCode);\r",
+									"    pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"//valida existência de conjunto de atributos\r",
+									"const atributo = 'message'\r",
+									"\r",
+									"pm.test(`Resposta contém atributo \"${atributo}\"`, () => {\r",
+									"    pm.expect(response[atributo]).to.exist\r",
+									"})\r",
+									"\r",
+									"//Valida mensagem principal\r",
+									"const mensagem = 'Registro excluído com sucesso'\r",
+									"pm.test(`Mensagem \"${mensagem}\" é exibida`, function () {\r",
+									"    pm.expect(JSON.stringify(response)).to.include(mensagem);\r",
+									"});\r",
+									"/******************************************/\r",
+									"\r",
+									"//realizar request para conferir que ID do usuário não existe mais;\r",
+									"\r",
+									"const baseUrl = pm.environment.get('baseUrl');\r",
+									"const id = pm.environment.get('id_usuario')\r",
+									"\r",
+									"const getRequest = {\r",
+									"    url: `${baseUrl}/usuarios/${id}`,\r",
+									"    method: 'GET',\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(getRequest, (err, res) => {\r",
+									"    try {\r",
+									"        pm.test('Usuário foi efetivamente excluído da base de dados', () => {\r",
+									"            pm.expect(res.json().message).equals('Usuário não encontrado')\r",
+									"        })\r",
+									"    } catch {\r",
+									"        console.warn('FAIL')\r",
+									"    }\r",
+									"})\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//constante contendo baseURL atual para usar no script\r",
+									"const baseUrl = pm.environment.get('baseUrl');\r",
+									"\r",
+									"//chamada para função interna de geração aleatória de valores\r",
+									"const nome = pm.variables.replaceIn('{{$randomFirstName}}')\r",
+									"const email = pm.variables.replaceIn('{{$randomEmail}}')\r",
+									"const password = pm.variables.replaceIn('teste')\r",
+									"const administrador = pm.variables.replaceIn('true')\r",
+									"\r",
+									"//dados da requisição\r",
+									"const postRequest = {\r",
+									"    url: `${baseUrl}/usuarios`,\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/json'  //se houver body json, informar este cabeçalho\r",
+									"        },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            \"nome\": nome, \r",
+									"            \"email\": email,\r",
+									"            \"password\": password,\r",
+									"            \"administrador\": administrador\r",
+									"        })\r",
+									"    } \r",
+									"}\r",
+									"\r",
+									"//requisição\r",
+									"pm.sendRequest(postRequest, (err, res) => {\r",
+									"    console.log(err ? err : res.json());\r",
+									"    try {\r",
+									"        pm.environment.set('nome_usuario',nome)\r",
+									"        pm.environment.set('email_usuario', email)\r",
+									"        pm.environment.set('password_usuario', password)\r",
+									"        pm.environment.set('administrador_usuario', administrador)\r",
+									"        pm.environment.set('id_usuario', res.json()['_id'])\r",
+									"    } catch {\r",
+									"        console.warn('FAIL')\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/usuarios/{{id_usuario}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"usuarios",
+								"{{id_usuario}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Gerencie os usuários, consulte dados para login e cadastre administrador"
+		},
+		{
+			"name": "Produtos",
+			"item": [
+				{
+					"name": "Validar lista de produtos cadastrados",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//declara response como resposta da requisição\r",
+									"const response = pm.response.json(); \r",
+									"\r",
+									"//Valida statusCode\r",
+									"const statusCode = 200\r",
+									"pm.test(`Status: ${statusCode}, OK`, function () {\r",
+									"    pm.response.to.have.status(statusCode);\r",
+									"    pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"//valida existência de conjunto de atributos\r",
+									"const atributos = ['quantidade', 'produtos']\r",
+									"\r",
+									"atributos.forEach((atributo) => {\r",
+									"    pm.test(`Resposta contém atributo \"${atributo}\"`, () => {\r",
+									"        pm.expect(response[atributo]).to.exist\r",
+									"    })\r",
+									"})\r",
+									"\r",
+									"pm.test('Quantidade de produtos é exibida adequadamente', () => {\r",
+									"    pm.expect(response.quantidade).equals(response.produtos.length)\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/produtos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar cadastro de produto com sucesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//declara response como resposta da requisição\r",
+									"const response = pm.response.json(); \r",
+									"\r",
+									"//Valida statusCode e salva id do produto em uma variável\r",
+									"const statusCode = 201\r",
+									"pm.test(`Status: ${statusCode}, created`, function () {\r",
+									"    pm.response.to.have.status(statusCode);\r",
+									"     \r",
+									"    pm.environment.set(\"id_produto\", response._id);   \r",
+									"});\r",
+									"\r",
+									"\r",
+									"//valida existência de conjunto de atributos\r",
+									"const atributos = ['message', '_id']\r",
+									"\r",
+									"atributos.forEach((atributo) => {\r",
+									"    pm.test(`Resposta contém atributo \"${atributo}\"`, () => {\r",
+									"        pm.expect(response[atributo]).to.exist\r",
+									"    })\r",
+									"})\r",
+									"\r",
+									"//Valida mensagem principal\r",
+									"const mensagem = 'Cadastro realizado com sucesso'\r",
+									"pm.test(`Mensagem \"${mensagem}\" é exibida`, function () {\r",
+									"    pm.expect(JSON.stringify(response)).to.include(mensagem);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"const baseUrl = pm.environment.get('baseUrl');\r",
+									"const nome = pm.variables.replaceIn('{{$randomFirstName}}')\r",
+									"const email = pm.variables.replaceIn('{{$randomEmail}}')\r",
+									"const password = \"teste\"\r",
+									"\r",
+									"let postRequest = {\r",
+									"    url: `${baseUrl}/usuarios`,\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/json'\r",
+									"        },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            \"nome\": nome,\r",
+									"            \"email\": email,\r",
+									"            \"password\": password,\r",
+									"            \"administrador\": \"true\"\r",
+									"        })\r",
+									"    } \r",
+									"}\r",
+									"\r",
+									"\r",
+									"const cadastraUsuario = (request) => {\r",
+									"    pm.sendRequest(request, (err, res) => {\r",
+									"        console.log(err ? err : res.json());\r",
+									"        try {\r",
+									"            pm.environment.set('email_usuario', email)\r",
+									"            pm.environment.set('password_usuario', password)\r",
+									"        } catch {\r",
+									"            console.warn('FAIL')\r",
+									"        }\r",
+									"        realizaLogin()\r",
+									"    })\r",
+									"}\r",
+									"\r",
+									"const realizaLogin = () => {\r",
+									"    //constante contendo baseURL atual para usar no script\r",
+									"    const email_usuario = pm.variables.replaceIn('{{email_usuario}}')\r",
+									"    const password_usuario = pm.variables.replaceIn('{{password_usuario}}')\r",
+									"    //dados da requisição\r",
+									"    let loginRequest = {\r",
+									"        url: `${baseUrl}/login`,\r",
+									"        method: 'POST',\r",
+									"        header: {\r",
+									"            'Content-Type': 'application/json'\r",
+									"            },\r",
+									"        body: {\r",
+									"            mode: 'raw',\r",
+									"            raw: JSON.stringify({\r",
+									"                \"email\": email_usuario,\r",
+									"                \"password\": password_usuario\r",
+									"            })\r",
+									"        } \r",
+									"    }\r",
+									"\r",
+									"    //requisição\r",
+									"    pm.sendRequest(loginRequest, (err, res) => {\r",
+									"        console.log(err ? err : res.json());\r",
+									"\r",
+									"        try {\r",
+									"            pm.environment.set('token', res.json().authorization.slice(7))\r",
+									"        } catch {\r",
+									"            console.warn('FAIL')\r",
+									"        }\r",
+									"    })\r",
+									"}\r",
+									"\r",
+									"cadastraUsuario(postRequest)\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"{{$randomProduct}}\",\n  \"preco\": {{$randomInt}},\n  \"descricao\": \"{{$randomCatchPhrase}}\",\n  \"quantidade\": {{$randomInt}}\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/produtos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar buscar produto por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//declara response como resposta da requisição\r",
+									"const response = pm.response.json(); \r",
+									"\r",
+									"//Valida statusCode\r",
+									"const statusCode = 200\r",
+									"pm.test(`Status: ${statusCode}, OK`, function () {\r",
+									"    pm.response.to.have.status(statusCode);\r",
+									"    pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"//valida existência de conjunto de atributos\r",
+									"const atributos = ['nome', 'preco', 'descricao', 'quantidade', '_id']\r",
+									"\r",
+									"atributos.forEach((atributo) => {\r",
+									"    pm.test(`Resposta contém atributo \"${atributo}\"`, () => {\r",
+									"        pm.expect(response[atributo]).to.exist\r",
+									"    })\r",
+									"})\r",
+									"\r",
+									"//Valida conteúdo\r",
+									"pm.test(`Conteúdo da resposta está correto`, () => {\r",
+									"    pm.expect(response.nome).to.equals(pm.variables.replaceIn('{{nome_produto}}'));\r",
+									"    pm.expect(response.preco).to.equals(parseInt(pm.variables.replaceIn('{{preco_produto}}')));\r",
+									"    pm.expect(response.descricao).to.equals(pm.variables.replaceIn('{{descricao_produto}}'));\r",
+									"    pm.expect(response.quantidade).to.equals(parseInt(pm.variables.replaceIn('{{quantidade_produto}}')));\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//constante contendo baseURL atual para usar no script\r",
+									"const baseUrl = pm.environment.get('baseUrl');\r",
+									"\r",
+									"//dados da requisição\r",
+									"const getRequest = {\r",
+									"    url: `${baseUrl}/produtos`,\r",
+									"    method: 'GET'\r",
+									"}\r",
+									"\r",
+									"//requisição\r",
+									"pm.sendRequest(getRequest, (err, res) => {\r",
+									"    console.log(err ? err : res.json());\r",
+									"    try {\r",
+									"        pm.environment.set('id_produto', res.json().produtos[0]['_id'])\r",
+									"        pm.environment.set('nome_produto', res.json().produtos[0]['nome'])\r",
+									"        pm.environment.set('preco_produto', res.json().produtos[0]['preco'])\r",
+									"        pm.environment.set('descricao_produto', res.json().produtos[0]['descricao'])\r",
+									"        pm.environment.set('quantidade_produto', res.json().produtos[0]['quantidade'])\r",
+									"    } catch {\r",
+									"        console.warn('FAIL')\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/produtos/{{id_produto}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"produtos",
+								"{{id_produto}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar alterar produto com sucesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//declara response como resposta da requisição\r",
+									"const response = pm.response.json(); \r",
+									"\r",
+									"//Valida statusCode\r",
+									"const statusCode = 200\r",
+									"pm.test(`Status: ${statusCode}, OK`, function () {\r",
+									"    pm.response.to.have.status(statusCode);\r",
+									"    pm.response.to.be.ok; //ou to.be.badRequest etc\r",
+									"});\r",
+									"\r",
+									"//valida existência de conjunto de atributos\r",
+									"const atributo = 'message'\r",
+									"    pm.test(`Resposta contém atributo \"${atributo}\"`, () => {\r",
+									"        pm.expect(response[atributo]).to.exist\r",
+									"    })\r",
+									"\r",
+									"//Valida mensagem principal\r",
+									"const mensagem = 'Registro alterado com sucesso'\r",
+									"pm.test(`Mensagem \"${mensagem}\" é exibida`, function () {\r",
+									"    pm.expect(JSON.stringify(response)).to.include(mensagem);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"const baseUrl = pm.environment.get('baseUrl');\r",
+									"const nome = pm.variables.replaceIn('{{$randomFirstName}}')\r",
+									"const email = pm.variables.replaceIn('{{$randomEmail}}')\r",
+									"const password = \"teste\"\r",
+									"\r",
+									"const postRequest = {\r",
+									"    url: `${baseUrl}/usuarios`,\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/json'\r",
+									"        },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            \"nome\": nome,\r",
+									"            \"email\": email,\r",
+									"            \"password\": password,\r",
+									"            \"administrador\": \"true\"\r",
+									"        })\r",
+									"    } \r",
+									"}\r",
+									"\r",
+									"\r",
+									"const cadastraUsuario = (request) => {\r",
+									"    pm.sendRequest(request, (err, res) => {\r",
+									"        console.log(err ? err : res.json());\r",
+									"        try {\r",
+									"            pm.environment.set('email_usuario', email)\r",
+									"            pm.environment.set('password_usuario', password)\r",
+									"        } catch {\r",
+									"            console.warn('FAIL')\r",
+									"        }\r",
+									"        realizaLogin()\r",
+									"    })\r",
+									"}\r",
+									"\r",
+									"const realizaLogin = () => {\r",
+									"    //constante contendo baseURL atual para usar no script\r",
+									"    const email_usuario = pm.variables.replaceIn('{{email_usuario}}')\r",
+									"    const password_usuario = pm.variables.replaceIn('{{password_usuario}}')\r",
+									"    //dados da requisição\r",
+									"    const loginRequest = {\r",
+									"        url: `${baseUrl}/login`,\r",
+									"        method: 'POST',\r",
+									"        header: {\r",
+									"            'Content-Type': 'application/json'\r",
+									"            },\r",
+									"        body: {\r",
+									"            mode: 'raw',\r",
+									"            raw: JSON.stringify({\r",
+									"                \"email\": email_usuario,\r",
+									"                \"password\": password_usuario\r",
+									"            })\r",
+									"        } \r",
+									"    }\r",
+									"\r",
+									"    //requisição\r",
+									"    pm.sendRequest(loginRequest, (err, res) => {\r",
+									"        console.log(err ? err : res.json());\r",
+									"\r",
+									"        try {\r",
+									"            pm.environment.set('token', res.json().authorization.slice(7))\r",
+									"        } catch {\r",
+									"            console.warn('FAIL')\r",
+									"        }\r",
+									"    })\r",
+									"}\r",
+									"\r",
+									"cadastraUsuario(postRequest)\r",
+									"\r",
+									"const getProdutoRequest = {\r",
+									"    url: `${baseUrl}/produtos`,\r",
+									"        method: 'GET',\r",
+									"}\r",
+									"\r",
+									"//requisição\r",
+									"pm.sendRequest(getProdutoRequest, (err, res) => {\r",
+									"    console.log(err ? err : res.json());\r",
+									"\r",
+									"    try {\r",
+									"        pm.environment.set('id_produto', res.json().produtos[0]['_id'])\r",
+									"        // pm.environment.set('nome_produto', res.json().produtos[0]['nome'])\r",
+									"        // pm.environment.set('preco_produto', res.json().produtos[0]['preco'])\r",
+									"        // pm.environment.set('descricao_produto', res.json().produtos[0]['descricao'])\r",
+									"        // pm.environment.set('quantidade_produto', res.json().produtos[0]['quantidade'])\r",
+									"    } catch {\r",
+									"        console.warn('FAIL')\r",
+									"    }\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"{{$randomProduct}}\",\n  \"preco\": {{$randomInt}},\n  \"descricao\": \"{{$randomCatchPhrase}}\",\n  \"quantidade\": {{$randomInt}}\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/produtos/{{id_produto}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"produtos",
+								"{{id_produto}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar excluir produto com sucesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"//declara response como resposta da requisição\r",
+									"const response = pm.response.json(); \r",
+									"\r",
+									"//Valida statusCode\r",
+									"const statusCode = 200\r",
+									"pm.test(`Status: ${statusCode}, OK`, function () {\r",
+									"    pm.response.to.have.status(statusCode);\r",
+									"    pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"//valida existência de conjunto de atributos\r",
+									"const atributo = 'message'\r",
+									"    pm.test(`Resposta contém atributo \"${atributo}\"`, () => {\r",
+									"        pm.expect(response[atributo]).to.exist\r",
+									"    })\r",
+									"\r",
+									"//Valida mensagem principal\r",
+									"const mensagem = 'Registro excluído com sucesso'\r",
+									"pm.test(`Mensagem \"${mensagem}\" é exibida`, function () {\r",
+									"    pm.expect(JSON.stringify(response)).to.include(mensagem);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"const baseUrl = pm.environment.get('baseUrl');\r",
+									"const nome = pm.variables.replaceIn('{{$randomFirstName}}')\r",
+									"const email = pm.variables.replaceIn('{{$randomEmail}}')\r",
+									"const password = \"teste\"\r",
+									"\r",
+									"const postRequest = {\r",
+									"    url: `${baseUrl}/usuarios`,\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/json'\r",
+									"        },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            \"nome\": nome,\r",
+									"            \"email\": email,\r",
+									"            \"password\": password,\r",
+									"            \"administrador\": \"true\"\r",
+									"        })\r",
+									"    } \r",
+									"}\r",
+									"\r",
+									"\r",
+									"const cadastraUsuario = (request) => {\r",
+									"    pm.sendRequest(request, (err, res) => {\r",
+									"        console.log(err ? err : res.json());\r",
+									"        try {\r",
+									"            pm.environment.set('email_usuario', email)\r",
+									"            pm.environment.set('password_usuario', password)\r",
+									"        } catch {\r",
+									"            console.warn('FAIL')\r",
+									"        }\r",
+									"        realizaLogin()\r",
+									"        postProduto()\r",
+									"    })\r",
+									"}\r",
+									"\r",
+									"const realizaLogin = () => {\r",
+									"    //constante contendo baseURL atual para usar no script\r",
+									"    const email_usuario = pm.variables.replaceIn('{{email_usuario}}')\r",
+									"    const password_usuario = pm.variables.replaceIn('{{password_usuario}}')\r",
+									"    //dados da requisição\r",
+									"    const loginRequest = {\r",
+									"        url: `${baseUrl}/login`,\r",
+									"        method: 'POST',\r",
+									"        header: {\r",
+									"            'Content-Type': 'application/json'\r",
+									"            },\r",
+									"        body: {\r",
+									"            mode: 'raw',\r",
+									"            raw: JSON.stringify({\r",
+									"                \"email\": email_usuario,\r",
+									"                \"password\": password_usuario\r",
+									"            })\r",
+									"        } \r",
+									"    }\r",
+									"\r",
+									"    //requisição\r",
+									"    pm.sendRequest(loginRequest, (err, res) => {\r",
+									"        console.log(err ? err : res.json());\r",
+									"\r",
+									"        try {\r",
+									"            pm.environment.set('token', res.json().authorization.slice(7))\r",
+									"        } catch {\r",
+									"            console.warn('FAIL')\r",
+									"        }\r",
+									"    })\r",
+									"}\r",
+									"\r",
+									"const postProduto = () => {\r",
+									"    const prodNome = pm.variables.replaceIn('{{$randomProduct}} ' + '{{$randomProduct}}')\r",
+									"    const prodPreco = pm.variables.replaceIn('{{$randomInt}}')\r",
+									"    const prodDesc = pm.variables.replaceIn('{{$randomCatchPhrase}}')\r",
+									"    const prodQuant = pm.variables.replaceIn('{{$randomInt}}')\r",
+									"    const bToken = pm.environment.get('token')\r",
+									"\r",
+									"    const postProdutoRequest = {\r",
+									"        url: `${baseUrl}/produtos`,\r",
+									"        method: 'POST',\r",
+									"        header: {\r",
+									"                'Content-Type': 'application/json',\r",
+									"                'Authorization': `Bearer ${bToken}`\r",
+									"        },\r",
+									"        body: {\r",
+									"            mode: 'raw',\r",
+									"            raw: JSON.stringify({\r",
+									"                \"nome\": prodNome,\r",
+									"                \"preco\": prodPreco,\r",
+									"                \"descricao\": prodDesc,\r",
+									"                \"quantidade\": prodQuant\r",
+									"            })\r",
+									"        } \r",
+									"    }\r",
+									"\r",
+									"    //requisição\r",
+									"    pm.sendRequest(postProdutoRequest, (err, res) => {\r",
+									"        console.log(err ? err : res.json());\r",
+									"\r",
+									"        try {\r",
+									"            pm.environment.set('id_produto', res.json()['_id'])\r",
+									"        } catch {\r",
+									"            console.warn('FAIL')\r",
+									"        }\r",
+									"    })\r",
+									"}\r",
+									"\r",
+									"cadastraUsuario(postRequest)\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/produtos/{{id_produto}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"produtos",
+								"{{id_produto}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Consulte produtos cadastrados ou, como administrador, gerencie os produtos da loja",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Carrinho",
+			"item": [
+				{
+					"name": "Validar listas de carrinhos cadastrados",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//declara response como resposta da requisição\r",
+									"const response = pm.response.json(); \r",
+									"\r",
+									"//Valida statusCode\r",
+									"const statusCode = 200\r",
+									"pm.test(`Status: ${statusCode}, OK`, function () {\r",
+									"    pm.response.to.have.status(statusCode);\r",
+									"    pm.response.to.be.ok; //ou to.be.badRequest etc\r",
+									"});\r",
+									"\r",
+									"//valida existência de conjunto de atributos\r",
+									"const atributos = ['quantidade', 'carrinhos']\r",
+									"\r",
+									"atributos.forEach((atributo) => {\r",
+									"    pm.test(`Resposta contém atributo \"${atributo}\"`, () => {\r",
+									"        pm.expect(response[atributo]).to.exist\r",
+									"    })\r",
+									"})\r",
+									"\r",
+									"pm.test(`Quantidade de carrinhos exibidos é a mesma informada`, function () {\r",
+									"    pm.expect(response.carrinhos.length).to.equals(response.quantidade);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/carrinhos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carrinhos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar cadastrar carrinho com sucesso",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"const baseUrl = pm.environment.get('baseUrl');\r",
+									"const nome = pm.variables.replaceIn('{{$randomFirstName}}')\r",
+									"const email = pm.variables.replaceIn('{{$randomEmail}}')\r",
+									"const password = \"teste\"\r",
+									"\r",
+									"const postRequest = {\r",
+									"    url: `${baseUrl}/usuarios`,\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/json'\r",
+									"        },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            \"nome\": nome,\r",
+									"            \"email\": email,\r",
+									"            \"password\": password,\r",
+									"            \"administrador\": \"true\"\r",
+									"        })\r",
+									"    } \r",
+									"}\r",
+									"\r",
+									"\r",
+									"const cadastraUsuario = (request) => {\r",
+									"    pm.sendRequest(request, (err, res) => {\r",
+									"        console.log(err ? err : res.json());\r",
+									"        try {\r",
+									"            pm.environment.set('email_usuario', email)\r",
+									"            pm.environment.set('password_usuario', password)\r",
+									"        } catch {\r",
+									"            console.warn('FAIL')\r",
+									"        }\r",
+									"        realizaLogin()\r",
+									"        postProduto()\r",
+									"    })\r",
+									"}\r",
+									"\r",
+									"const realizaLogin = () => {\r",
+									"    //constante contendo baseURL atual para usar no script\r",
+									"    const email_usuario = pm.variables.replaceIn('{{email_usuario}}')\r",
+									"    const password_usuario = pm.variables.replaceIn('{{password_usuario}}')\r",
+									"    //dados da requisição\r",
+									"    const loginRequest = {\r",
+									"        url: `${baseUrl}/login`,\r",
+									"        method: 'POST',\r",
+									"        header: {\r",
+									"            'Content-Type': 'application/json'\r",
+									"            },\r",
+									"        body: {\r",
+									"            mode: 'raw',\r",
+									"            raw: JSON.stringify({\r",
+									"                \"email\": email_usuario,\r",
+									"                \"password\": password_usuario\r",
+									"            })\r",
+									"        } \r",
+									"    }\r",
+									"\r",
+									"    //requisição\r",
+									"    pm.sendRequest(loginRequest, (err, res) => {\r",
+									"        console.log(err ? err : res.json());\r",
+									"\r",
+									"        try {\r",
+									"            pm.environment.set('token', res.json().authorization.slice(7))\r",
+									"        } catch {\r",
+									"            console.warn('FAIL')\r",
+									"        }\r",
+									"    })\r",
+									"}\r",
+									"\r",
+									"const postProduto = () => {\r",
+									"    const prodNome = pm.variables.replaceIn('{{$randomProduct}} ' + '{{$randomProduct}}')\r",
+									"    const prodPreco = pm.variables.replaceIn('{{$randomInt}}')\r",
+									"    const prodDesc = pm.variables.replaceIn('{{$randomCatchPhrase}}')\r",
+									"    const prodQuant = pm.variables.replaceIn('{{$randomInt}}')\r",
+									"    const bToken = pm.environment.get('token')\r",
+									"\r",
+									"    const postProdutoRequest = {\r",
+									"        url: `${baseUrl}/produtos`,\r",
+									"        method: 'POST',\r",
+									"        header: {\r",
+									"                'Content-Type': 'application/json',\r",
+									"                'Authorization': `Bearer ${bToken}`\r",
+									"        },\r",
+									"        body: {\r",
+									"            mode: 'raw',\r",
+									"            raw: JSON.stringify({\r",
+									"                \"nome\": prodNome,\r",
+									"                \"preco\": prodPreco,\r",
+									"                \"descricao\": prodDesc,\r",
+									"                \"quantidade\": prodQuant\r",
+									"            })\r",
+									"        } \r",
+									"    }\r",
+									"\r",
+									"    //requisição\r",
+									"    pm.sendRequest(postProdutoRequest, (err, res) => {\r",
+									"        console.log(err ? err : res.json());\r",
+									"\r",
+									"        try {\r",
+									"            pm.environment.set('id_produto', res.json()['_id'])\r",
+									"        } catch {\r",
+									"            console.warn('FAIL')\r",
+									"        }\r",
+									"    })\r",
+									"}\r",
+									"\r",
+									"cadastraUsuario(postRequest)\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//declara response como resposta da requisição\r",
+									"const response = pm.response.json(); \r",
+									"\r",
+									"//Valida statusCode\r",
+									"const statusCode = 201\r",
+									"pm.test(`Status: ${statusCode}`, function () {\r",
+									"    pm.response.to.have.status(statusCode);\r",
+									"\r",
+									"    pm.environment.set(\"id_carrinho\", response._id);   \r",
+									"});\r",
+									"\r",
+									"//valida existência de conjunto de atributos\r",
+									"const atributos = ['message', '_id']\r",
+									"\r",
+									"atributos.forEach((atributo) => {\r",
+									"    pm.test(`Resposta contém atributo \"${atributo}\"`, () => {\r",
+									"        pm.expect(response[atributo]).to.exist\r",
+									"    })\r",
+									"})\r",
+									"\r",
+									"//Valida mensagem principal\r",
+									"const mensagem = 'Cadastro realizado com sucesso'\r",
+									"pm.test(`Mensagem \"${mensagem}\" é exibida`, function () {\r",
+									"    pm.expect(JSON.stringify(response)).to.include(mensagem);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"produtos\": [\r\n    {\r\n      \"idProduto\": \"{{id_produto}}\",\r\n      \"quantidade\": 1\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/carrinhos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carrinhos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar buscar carrinho por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//declara response como resposta da requisição\r",
+									"const response = pm.response.json(); \r",
+									"\r",
+									"//Valida statusCode\r",
+									"const statusCode = 200\r",
+									"pm.test(`Status: ${statusCode}, OK`, function () {\r",
+									"    pm.response.to.have.status(statusCode);\r",
+									"    pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"//valida existência de conjunto de atributos\r",
+									"const atributos = ['produtos', 'precoTotal', 'quantidadeTotal', 'idUsuario', '_id']\r",
+									"\r",
+									"atributos.forEach((atributo) => {\r",
+									"    pm.test(`Resposta contém atributo \"${atributo}\"`, () => {\r",
+									"        pm.expect(response[atributo]).to.exist\r",
+									"    })\r",
+									"})\r",
+									"\r",
+									"\r",
+									"pm.test(`Quantidade de produtos no carrinho é igual à informada`, function () {\r",
+									"    pm.expect(response.produtos.length).to.equals(response.quantidadeTotal);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"const baseUrl = pm.environment.get('baseUrl');\r",
+									"const nome = pm.variables.replaceIn('{{$randomFirstName}}')\r",
+									"const email = pm.variables.replaceIn('{{$randomEmail}}')\r",
+									"const password = \"teste\"\r",
+									"\r",
+									"const postRequest = {\r",
+									"    url: `${baseUrl}/usuarios`,\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/json'\r",
+									"        },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            \"nome\": nome,\r",
+									"            \"email\": email,\r",
+									"            \"password\": password,\r",
+									"            \"administrador\": \"true\"\r",
+									"        })\r",
+									"    } \r",
+									"}\r",
+									"\r",
+									"\r",
+									"const cadastraUsuario = (request) => {\r",
+									"    pm.sendRequest(request, (err, res) => {\r",
+									"        console.log(err ? err : res.json());\r",
+									"        try {\r",
+									"            pm.environment.set('email_usuario', email)\r",
+									"            pm.environment.set('password_usuario', password)\r",
+									"        } catch {\r",
+									"            console.warn('FAIL')\r",
+									"        }\r",
+									"        realizaLogin()\r",
+									"    })\r",
+									"}\r",
+									"\r",
+									"const realizaLogin = () => {\r",
+									"    //constante contendo baseURL atual para usar no script\r",
+									"    const email_usuario = pm.variables.replaceIn('{{email_usuario}}')\r",
+									"    const password_usuario = pm.variables.replaceIn('{{password_usuario}}')\r",
+									"    //dados da requisição\r",
+									"    const loginRequest = {\r",
+									"        url: `${baseUrl}/login`,\r",
+									"        method: 'POST',\r",
+									"        header: {\r",
+									"            'Content-Type': 'application/json'\r",
+									"            },\r",
+									"        body: {\r",
+									"            mode: 'raw',\r",
+									"            raw: JSON.stringify({\r",
+									"                \"email\": email_usuario,\r",
+									"                \"password\": password_usuario\r",
+									"            })\r",
+									"        } \r",
+									"    }\r",
+									"\r",
+									"    //requisição\r",
+									"    pm.sendRequest(loginRequest, (err, res) => {\r",
+									"        console.log(err ? err : res.json());\r",
+									"\r",
+									"        try {\r",
+									"            pm.environment.set('token', res.json().authorization.slice(7))\r",
+									"        } catch {\r",
+									"            console.warn('FAIL')\r",
+									"        }\r",
+									"    })\r",
+									"    postProduto()\r",
+									"}\r",
+									"\r",
+									"const postProduto = () => {\r",
+									"    const prodNome = pm.variables.replaceIn('{{$randomProduct}} ' + '{{$randomProduct}}')\r",
+									"    const prodPreco = pm.variables.replaceIn('{{$randomInt}}')\r",
+									"    const prodDesc = pm.variables.replaceIn('{{$randomCatchPhrase}}')\r",
+									"    const prodQuant = pm.variables.replaceIn('{{$randomInt}}')\r",
+									"    const bToken = pm.environment.get('token')\r",
+									"\r",
+									"    const postProdutoRequest = {\r",
+									"        url: `${baseUrl}/produtos`,\r",
+									"        method: 'POST',\r",
+									"        header: {\r",
+									"                'Content-Type': 'application/json',\r",
+									"                'Authorization': `Bearer ${bToken}`\r",
+									"        },\r",
+									"        body: {\r",
+									"            mode: 'raw',\r",
+									"            raw: JSON.stringify({\r",
+									"                \"nome\": prodNome,\r",
+									"                \"preco\": prodPreco,\r",
+									"                \"descricao\": prodDesc,\r",
+									"                \"quantidade\": prodQuant\r",
+									"            })\r",
+									"        } \r",
+									"    }\r",
+									"\r",
+									"    //requisição\r",
+									"    pm.sendRequest(postProdutoRequest, (err, res) => {\r",
+									"        console.log(err ? err : res.json());\r",
+									"\r",
+									"        try {\r",
+									"            pm.environment.set('id_produto', res.json()['_id'])\r",
+									"        } catch {\r",
+									"            console.warn('FAIL')\r",
+									"        }\r",
+									"    })\r",
+									"    postCarrinho()\r",
+									"}\r",
+									"\r",
+									"const postCarrinho = () => {\r",
+									"    const idProd = pm.variables.replaceIn('{{id_produto}}')\r",
+									"    const bToken = pm.environment.get('token')\r",
+									"\r",
+									"    const postProdutoRequest = {\r",
+									"        url: `${baseUrl}/carrinhos`,\r",
+									"        method: 'POST',\r",
+									"        header: {\r",
+									"                'Content-Type': 'application/json',\r",
+									"                'Authorization': `Bearer ${bToken}`\r",
+									"        },\r",
+									"        body: {\r",
+									"            mode: 'raw',\r",
+									"            raw: JSON.stringify({\r",
+									"                \"produtos\": [\r",
+									"                    {\r",
+									"                    \"idProduto\": idProd,\r",
+									"                    \"quantidade\": 1\r",
+									"                    }\r",
+									"                ]\r",
+									"            })\r",
+									"        } \r",
+									"    }\r",
+									"\r",
+									"    //requisição\r",
+									"    pm.sendRequest(postProdutoRequest, (err, res) => {\r",
+									"        console.log(err ? err : res.json());\r",
+									"\r",
+									"        try {\r",
+									"            pm.environment.set('id_carrinho', res.json()['_id'])\r",
+									"        } catch {\r",
+									"            console.warn('FAIL')\r",
+									"        }\r",
+									"    })\r",
+									"}\r",
+									"\r",
+									"cadastraUsuario(postRequest)\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/carrinhos/{{id_carrinho}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carrinhos",
+								"{{id_carrinho}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar excluir carrinho com sucesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//declara response como resposta da requisição\r",
+									"const response = pm.response.json(); \r",
+									"\r",
+									"//Valida statusCode\r",
+									"const statusCode = 200\r",
+									"pm.test(`Status: ${statusCode}, OK`, function () {\r",
+									"    pm.response.to.have.status(statusCode);\r",
+									"    pm.response.to.be.ok; //ou to.be.badRequest etc\r",
+									"});\r",
+									"\r",
+									"//valida existência de conjunto de atributos\r",
+									"const atributo = 'message'\r",
+									"    pm.test(`Resposta contém atributo \"${atributo}\"`, () => {\r",
+									"        pm.expect(response[atributo]).to.exist\r",
+									"    })\r",
+									"\r",
+									"//Valida mensagem principal\r",
+									"const mensagem = 'Registro excluído com sucesso'\r",
+									"pm.test(`Mensagem \"${mensagem}\" é exibida`, function () {\r",
+									"    pm.expect(JSON.stringify(response)).to.include(mensagem);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"const baseUrl = pm.environment.get('baseUrl');\r",
+									"const nome = pm.variables.replaceIn('{{$randomFirstName}}')\r",
+									"const email = pm.variables.replaceIn('{{$randomEmail}}')\r",
+									"const password = \"teste\"\r",
+									"\r",
+									"const postRequest = {\r",
+									"    url: `${baseUrl}/usuarios`,\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/json'\r",
+									"        },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            \"nome\": nome,\r",
+									"            \"email\": email,\r",
+									"            \"password\": password,\r",
+									"            \"administrador\": \"true\"\r",
+									"        })\r",
+									"    } \r",
+									"}\r",
+									"\r",
+									"\r",
+									"const cadastraUsuario = (request) => {\r",
+									"    pm.sendRequest(request, (err, res) => {\r",
+									"        console.log(err ? err : res.json());\r",
+									"        try {\r",
+									"            pm.environment.set('email_usuario', email)\r",
+									"            pm.environment.set('password_usuario', password)\r",
+									"        } catch {\r",
+									"            console.warn('FAIL')\r",
+									"        }\r",
+									"        realizaLogin()\r",
+									"    })\r",
+									"}\r",
+									"\r",
+									"const realizaLogin = () => {\r",
+									"    //constante contendo baseURL atual para usar no script\r",
+									"    const email_usuario = pm.variables.replaceIn('{{email_usuario}}')\r",
+									"    const password_usuario = pm.variables.replaceIn('{{password_usuario}}')\r",
+									"    //dados da requisição\r",
+									"    const loginRequest = {\r",
+									"        url: `${baseUrl}/login`,\r",
+									"        method: 'POST',\r",
+									"        header: {\r",
+									"            'Content-Type': 'application/json'\r",
+									"            },\r",
+									"        body: {\r",
+									"            mode: 'raw',\r",
+									"            raw: JSON.stringify({\r",
+									"                \"email\": email_usuario,\r",
+									"                \"password\": password_usuario\r",
+									"            })\r",
+									"        } \r",
+									"    }\r",
+									"\r",
+									"    //requisição\r",
+									"    pm.sendRequest(loginRequest, (err, res) => {\r",
+									"        console.log(err ? err : res.json());\r",
+									"\r",
+									"        try {\r",
+									"            pm.environment.set('token', res.json().authorization.slice(7))\r",
+									"        } catch {\r",
+									"            console.warn('FAIL')\r",
+									"        }\r",
+									"    })\r",
+									"    postProduto()\r",
+									"}\r",
+									"\r",
+									"const postProduto = () => {\r",
+									"    const prodNome = pm.variables.replaceIn('{{$randomProduct}} ' + '{{$randomProduct}}')\r",
+									"    const prodPreco = pm.variables.replaceIn('{{$randomInt}}')\r",
+									"    const prodDesc = pm.variables.replaceIn('{{$randomCatchPhrase}}')\r",
+									"    const prodQuant = pm.variables.replaceIn('{{$randomInt}}')\r",
+									"    const bToken = pm.environment.get('token')\r",
+									"\r",
+									"    const postProdutoRequest = {\r",
+									"        url: `${baseUrl}/produtos`,\r",
+									"        method: 'POST',\r",
+									"        header: {\r",
+									"                'Content-Type': 'application/json',\r",
+									"                'Authorization': `Bearer ${bToken}`\r",
+									"        },\r",
+									"        body: {\r",
+									"            mode: 'raw',\r",
+									"            raw: JSON.stringify({\r",
+									"                \"nome\": prodNome,\r",
+									"                \"preco\": prodPreco,\r",
+									"                \"descricao\": prodDesc,\r",
+									"                \"quantidade\": prodQuant\r",
+									"            })\r",
+									"        } \r",
+									"    }\r",
+									"\r",
+									"    //requisição\r",
+									"    pm.sendRequest(postProdutoRequest, (err, res) => {\r",
+									"        console.log(err ? err : res.json());\r",
+									"\r",
+									"        try {\r",
+									"            pm.environment.set('id_produto', res.json()['_id'])\r",
+									"        } catch {\r",
+									"            console.warn('FAIL')\r",
+									"        }\r",
+									"    })\r",
+									"    postCarrinho()\r",
+									"}\r",
+									"\r",
+									"const postCarrinho = () => {\r",
+									"    const idProd = pm.variables.replaceIn('{{id_produto}}')\r",
+									"    const bToken = pm.environment.get('token')\r",
+									"\r",
+									"    const postProdutoRequest = {\r",
+									"        url: `${baseUrl}/carrinhos`,\r",
+									"        method: 'POST',\r",
+									"        header: {\r",
+									"                'Content-Type': 'application/json',\r",
+									"                'Authorization': `Bearer ${bToken}`\r",
+									"        },\r",
+									"        body: {\r",
+									"            mode: 'raw',\r",
+									"            raw: JSON.stringify({\r",
+									"                \"produtos\": [\r",
+									"                    {\r",
+									"                    \"idProduto\": idProd,\r",
+									"                    \"quantidade\": 1\r",
+									"                    }\r",
+									"                ]\r",
+									"            })\r",
+									"        } \r",
+									"    }\r",
+									"\r",
+									"    //requisição\r",
+									"    pm.sendRequest(postProdutoRequest, (err, res) => {\r",
+									"        console.log(err ? err : res.json());\r",
+									"\r",
+									"        try {\r",
+									"            pm.environment.set('id_carrinho', res.json()['_id'])\r",
+									"            pm.environment.set('token', bToken)\r",
+									"        } catch {\r",
+									"            console.warn('FAIL')\r",
+									"        }\r",
+									"    })\r",
+									"}\r",
+									"\r",
+									"cadastraUsuario(postRequest)\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/carrinhos/concluir-compra",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carrinhos",
+								"concluir-compra"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar excluir carrinho e retornar produto ao estoque",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//declara response como resposta da requisição\r",
+									"const response = pm.response.json(); \r",
+									"\r",
+									"//Valida statusCode\r",
+									"const statusCode = 200\r",
+									"pm.test(`Status: ${statusCode}, OK`, function () {\r",
+									"    pm.response.to.have.status(statusCode);\r",
+									"    pm.response.to.be.ok; //ou to.be.badRequest etc\r",
+									"});\r",
+									"\r",
+									"//valida existência de conjunto de atributos\r",
+									"const atributo = 'message'\r",
+									"    pm.test(`Resposta contém atributo \"${atributo}\"`, () => {\r",
+									"        pm.expect(response[atributo]).to.exist\r",
+									"    })\r",
+									"\r",
+									"//Valida mensagem principal\r",
+									"const mensagem = 'Registro excluído com sucesso. Estoque dos produtos reabastecido'\r",
+									"pm.test(`Mensagem \"${mensagem}\" é exibida`, function () {\r",
+									"    pm.expect(JSON.stringify(response)).to.include(mensagem);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"const baseUrl = pm.environment.get('baseUrl');\r",
+									"const nome = pm.variables.replaceIn('{{$randomFirstName}}')\r",
+									"const email = pm.variables.replaceIn('{{$randomEmail}}')\r",
+									"const password = \"teste\"\r",
+									"\r",
+									"const postRequest = {\r",
+									"    url: `${baseUrl}/usuarios`,\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/json'\r",
+									"        },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            \"nome\": nome,\r",
+									"            \"email\": email,\r",
+									"            \"password\": password,\r",
+									"            \"administrador\": \"true\"\r",
+									"        })\r",
+									"    } \r",
+									"}\r",
+									"\r",
+									"\r",
+									"const cadastraUsuario = (request) => {\r",
+									"    pm.sendRequest(request, (err, res) => {\r",
+									"        console.log(err ? err : res.json());\r",
+									"        try {\r",
+									"            pm.environment.set('email_usuario', email)\r",
+									"            pm.environment.set('password_usuario', password)\r",
+									"        } catch {\r",
+									"            console.warn('FAIL')\r",
+									"        }\r",
+									"        realizaLogin()\r",
+									"    })\r",
+									"}\r",
+									"\r",
+									"const realizaLogin = () => {\r",
+									"    //constante contendo baseURL atual para usar no script\r",
+									"    const email_usuario = pm.variables.replaceIn('{{email_usuario}}')\r",
+									"    const password_usuario = pm.variables.replaceIn('{{password_usuario}}')\r",
+									"    //dados da requisição\r",
+									"    const loginRequest = {\r",
+									"        url: `${baseUrl}/login`,\r",
+									"        method: 'POST',\r",
+									"        header: {\r",
+									"            'Content-Type': 'application/json'\r",
+									"            },\r",
+									"        body: {\r",
+									"            mode: 'raw',\r",
+									"            raw: JSON.stringify({\r",
+									"                \"email\": email_usuario,\r",
+									"                \"password\": password_usuario\r",
+									"            })\r",
+									"        } \r",
+									"    }\r",
+									"\r",
+									"    //requisição\r",
+									"    pm.sendRequest(loginRequest, (err, res) => {\r",
+									"        console.log(err ? err : res.json());\r",
+									"\r",
+									"        try {\r",
+									"            pm.environment.set('token', res.json().authorization.slice(7))\r",
+									"        } catch {\r",
+									"            console.warn('FAIL')\r",
+									"        }\r",
+									"    })\r",
+									"    postProduto()\r",
+									"}\r",
+									"\r",
+									"const postProduto = () => {\r",
+									"    const prodNome = pm.variables.replaceIn('{{$randomProduct}} ' + '{{$randomProduct}}')\r",
+									"    const prodPreco = pm.variables.replaceIn('{{$randomInt}}')\r",
+									"    const prodDesc = pm.variables.replaceIn('{{$randomCatchPhrase}}')\r",
+									"    const prodQuant = pm.variables.replaceIn('{{$randomInt}}')\r",
+									"    const bToken = pm.environment.get('token')\r",
+									"\r",
+									"    const postProdutoRequest = {\r",
+									"        url: `${baseUrl}/produtos`,\r",
+									"        method: 'POST',\r",
+									"        header: {\r",
+									"                'Content-Type': 'application/json',\r",
+									"                'Authorization': `Bearer ${bToken}`\r",
+									"        },\r",
+									"        body: {\r",
+									"            mode: 'raw',\r",
+									"            raw: JSON.stringify({\r",
+									"                \"nome\": prodNome,\r",
+									"                \"preco\": prodPreco,\r",
+									"                \"descricao\": prodDesc,\r",
+									"                \"quantidade\": prodQuant\r",
+									"            })\r",
+									"        } \r",
+									"    }\r",
+									"\r",
+									"    //requisição\r",
+									"    pm.sendRequest(postProdutoRequest, (err, res) => {\r",
+									"        console.log(err ? err : res.json());\r",
+									"\r",
+									"        try {\r",
+									"            pm.environment.set('id_produto', res.json()['_id'])\r",
+									"        } catch {\r",
+									"            console.warn('FAIL')\r",
+									"        }\r",
+									"    })\r",
+									"    postCarrinho()\r",
+									"}\r",
+									"\r",
+									"const postCarrinho = () => {\r",
+									"    const idProd = pm.variables.replaceIn('{{id_produto}}')\r",
+									"    const bToken = pm.environment.get('token')\r",
+									"\r",
+									"    const postProdutoRequest = {\r",
+									"        url: `${baseUrl}/carrinhos`,\r",
+									"        method: 'POST',\r",
+									"        header: {\r",
+									"                'Content-Type': 'application/json',\r",
+									"                'Authorization': `Bearer ${bToken}`\r",
+									"        },\r",
+									"        body: {\r",
+									"            mode: 'raw',\r",
+									"            raw: JSON.stringify({\r",
+									"                \"produtos\": [\r",
+									"                    {\r",
+									"                    \"idProduto\": idProd,\r",
+									"                    \"quantidade\": 1\r",
+									"                    }\r",
+									"                ]\r",
+									"            })\r",
+									"        } \r",
+									"    }\r",
+									"\r",
+									"    //requisição\r",
+									"    pm.sendRequest(postProdutoRequest, (err, res) => {\r",
+									"        console.log(err ? err : res.json());\r",
+									"\r",
+									"        try {\r",
+									"            pm.environment.set('id_carrinho', res.json()['_id'])\r",
+									"            pm.environment.set('token', bToken)\r",
+									"        } catch {\r",
+									"            console.warn('FAIL')\r",
+									"        }\r",
+									"    })\r",
+									"}\r",
+									"\r",
+									"cadastraUsuario(postRequest)\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/carrinhos/cancelar-compra",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carrinhos",
+								"cancelar-compra"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Consulte os carrinhos cadastrados, faça um para o seu usuário e, no final, desista da compra pois estava só dando uma olhadinha"
+		}
+	]
+}
