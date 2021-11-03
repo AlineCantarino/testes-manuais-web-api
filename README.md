@@ -6,4 +6,6 @@ TestesWeb, contém perguntas sobre testes e cenários mapeados da tela de cadast
 
 Serverest Web.postman_environment, Enviromment dos testes do Postman da API pública "SeverRest";
 
-Teste API Servest.postman_collection, Collection dos testes do Postman da API pública "SeverRest".
+Teste API Servest.postman_collection, Collection dos testes do Postman da API pública "SeverRest";
+
+Teste Livelo, contém projeto em Ruby antigo realizado em dezembro do ano passado. 
